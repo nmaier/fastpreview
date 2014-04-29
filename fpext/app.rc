@@ -1,0 +1,260 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_APP                 ICON                    "..\\icon\\fp-limited.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 3,4,0,0
+ PRODUCTVERSION 3,4,0,0
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "CompanyName", "Nils Maier"
+            VALUE "FileDescription", "FastPreview >> Shell Extension"
+            VALUE "FileVersion", "3.4.0.0"
+            VALUE "InternalName", "fastprev"
+            VALUE "LegalCopyright", "Copyright © 2006-2014 by Nils Maier"
+            VALUE "OriginalFilename", "fpext.dll"
+            VALUE "ProductName", "FastPreview"
+            VALUE "ProductVersion", "3.4.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200
+    END
+END
+
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_DATA_CTX MENU
+BEGIN
+    POPUP "DataCtx"
+    BEGIN
+        MENUITEM "Copy",                        ID_DATACTX_COPY
+        MENUITEM "Copy All",                    ID_DATACTX_COPYALL
+        MENUITEM SEPARATOR
+        MENUITEM "Copy Type",                   ID_DATACTX_COPYKEY
+        MENUITEM "Copy Value",                  ID_DATACTX_COPYDATA
+    END
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 277
+        VERTGUIDE, 33
+        VERTGUIDE, 212
+        VERTGUIDE, 218
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 240
+        HORZGUIDE, 60
+        HORZGUIDE, 64
+        HORZGUIDE, 190
+        HORZGUIDE, 195
+        HORZGUIDE, 206
+        HORZGUIDE, 223
+    END
+
+    IDD_FPPROPPAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 240
+        VERTGUIDE, 39
+        VERTGUIDE, 84
+        VERTGUIDE, 125
+        TOPMARGIN, 10
+        BOTTOMMARGIN, 266
+        HORZGUIDE, 22
+        HORZGUIDE, 35
+        HORZGUIDE, 52
+        HORZGUIDE, 252
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_OPTIONS DIALOGEX 0, 0, 285, 247
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,218,7,59,14
+    PUSHBUTTON      "Cancel",IDCANCEL,218,25,59,14
+    GROUPBOX        "Thumbnails",IDC_STATIC,7,195,270,45
+    ICON            IDI_APP,IDC_STATIC,7,7,21,20
+    LTEXT           "",IDC_ABOUT,32,7,180,53,SS_NOPREFIX
+    GROUPBOX        "Supported Formats",IDC_STATIC,7,64,270,126,WS_GROUP
+    CONTROL         "",IDC_FORMATS,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SORTASCENDING | LVS_ALIGNLEFT | LVS_NOSORTHEADER | WS_BORDER | WS_GROUP,15,73,253,110,WS_EX_STATICEDGE
+    CONTROL         "",IDC_WIDTH,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS | WS_TABSTOP,101,223,11,14
+    EDITTEXT        IDC_WIDTHT,61,223,40,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP
+    CONTROL         "",IDC_HEIGHT,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_ARROWKEYS | WS_TABSTOP,212,223,11,14
+    EDITTEXT        IDC_HEIGHTT,172,223,40,14,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP
+    LTEXT           "Width:",IDC_STATIC,33,223,22,8
+    LTEXT           "Height:",IDC_STATIC,137,223,27,8
+    CONTROL         "Show Thumbnail",IDC_CHECK_SHOW,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,33,206,185,17
+END
+
+IDD_FPPROPPAGE DIALOGEX 0, 0, 247, 277
+STYLE DS_SETFONT | DS_3DLOOK | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE | WS_CAPTION
+CAPTION "Property Page"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_DATA,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,99,233,148
+    EDITTEXT        IDC_FILE,84,10,156,12,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER,WS_EX_TRANSPARENT
+    CONTROL         "",IDC_THUMB,"Static",SS_OWNERDRAW,7,10,68,68,WS_EX_TRANSPARENT
+    LTEXT           "Type:",IDC_STATIC,84,22,41,8,0,WS_EX_TRANSPARENT
+    EDITTEXT        IDC_TYPE,125,22,115,13,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER,WS_EX_TRANSPARENT
+    LTEXT           "Dimensions:",IDC_STATIC,84,35,41,8,0,WS_EX_TRANSPARENT
+    EDITTEXT        IDC_DIMS,125,35,115,17,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER,WS_EX_TRANSPARENT
+    PUSHBUTTON      "Copy All",IDC_BUTTON_COPYALL,6,252,50,14
+    PUSHBUTTON      "Options",IDC_BUTTON_OPTIONS,191,252,50,14
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_INFOSNSETTINGS      "FP » Info and Settings"
+    IDS_THISFILE            "FastPreview » this file!"
+    IDS_FASTPREVIEW         "FP »"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ERROR               "Error..."
+    IDS_INFOSTR             " %1!d!px • %2!d!px (%5!s! MP) — %3!s! (%4!d!bit)"
+    IDS_COL_TYPE            "Type"
+    IDS_COL_VALUE           "Value"
+    IDS_SUPPORTEDFMT        "FastPreview » (supports %1!d! formats)"
+    IDS_COL_NAME            "Name"
+    IDS_PROP_TYPE           "%1!s! (%2!d!bit)"
+    IDS_COL_DESC            "Description"
+    IDS_COL_EXTS            "Usual Extensions"
+    IDS_PROP_DIMS           "%1!d!px • %2!d!px (%3!s! MP)"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

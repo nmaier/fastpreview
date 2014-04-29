@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FastPreview Manual</title>
+  <meta name="author" content="Nils Maier" />
+  <meta charset="utf-8">
+  <style type="text/css">
+html {
+	background-color: rgb(210,209,208);
+	font-family: 'Segoe UI', sans-serif;
+}
+body {
+	box-shadow: 0px 0px 10px rgba(33,33,33,0.8);
+	padding: 2em 6em 3em 6em;
+	color: rgb(30,30,40);
+	background-color: white;
+	max-width: 100ex;
+	font-size: large;
+	margin: 1em;
+	margin-left: auto;
+	margin-right: auto;
+}
+p, li {
+	max-width: 80ex;
+	margin-top: 1ex;
+	margin-bottom: 0.5ex;
+}
+a {
+	color: navy;
+}
+h1, h2, h3 {
+	text-shadow: 1px 1px 1px lightgray;
+	margin-top: 1.5ex;
+	margin-bottom: 0.5ex;
+}
+#underline {
+	text-shadow: 1px 1px 1px lightgray;
+	border-bottom: 1px solid rgba(128,128,128,0.6);
+}
+caption {
+	border-color: gray;
+	border-width: 2px;
+	padding: 1ex;
+	font-weight: bold;
+	font-size: 105%;
+}
+table, th, td {
+	border: 1px dotted gray;
+}
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+th {
+	padding: 2pt 4pt;
+	text-align: left;
+}
+th code {
+	color: darkslategray;
+}
+td {
+	padding-left: 4pt;
+	padding-right: 4pt;
+}
+li {
+	list-style-type: circle;
+	margin-bottom: 0.5ex;
+}
+  </style>
+</head>
+
+<body>
+<h1>FastPreview Manual</h1>
+<p id="underline">A PicaView replacement.</p>
+
+<h2>About</h2>
+
+<p>FastPreview is build to mimic old <a href="http://www.google.com/search?q=ACDSystems%20PicaView">PicaView</a>
+by ACDSystems. (mTools sucks :p). It has two components:</p>
+<ul>
+  <li><strong>The Viewer</strong> - built do easily display
+images (at different zoom states)</li>
+  <li><strong>The Shell Extension</strong> - it integrates with the regular Windows Contextual File Menu and displays wherever possible.</li>
+</ul>
+
+<h2>Features</h2>
+
+<p>The features are pretty limited. As intended!</p>
+
+<h3>Viewer</h3>
+
+<ul>
+  <li>Best Fit-Zoom</li>
+  <li>"Free" zooming (10%-wise)</li>
+  <li>Auto-Refreshing files upon changes</li>
+  <li>Re-sampling display filters</li>
+  <li>Lossless JPEG transformation</li>
+  <ul>
+    <li>Rotations</li>
+    <li>Flipping (Mirror-effects)</li>
+  </ul>
+  <li>Adds the Viewer to the <em>Open with</em> list for supported types, so you can easily open the viewer from there, or even make it the default application.</li>
+</ul>
+
+<table border="1">
+  <caption>Keyboard shortcuts</caption> <tbody>
+
+    <tr>
+      <th colspan="2" rowspan="1">General</th>
+    </tr>
+
+    <tr>
+      <th><code>DEL</code></th>
+      <td>Delete File</td>
+    </tr>
+
+    <tr>
+      <th><code>ESC</code></th>
+      <td colspan="1" rowspan="2">Quit program</td>
+    </tr>
+
+    <tr>
+      <th><code>ALT + F4</code></th>
+    </tr>
+
+    <tr>
+      <th><code>R</code></th>
+      <td colspan="1" rowspan="2">Forced Reload</td>
+    </tr>
+
+    <tr>
+      <th><code>F5</code></th>
+    </tr>
+
+    <tr>
+      <th colspan="2" rowspan="1">Navigation / Zoom</th>
+    </tr>
+
+    <tr>
+      <th><code>Arrow-Keys</code></th>
+      <td>Scroll</td>
+    </tr>
+
+    <tr>
+      <th><code>A</code></th>
+      <td>Switch Best Fit/Free Size</td>
+    </tr>
+
+    <tr>
+      <th><code>+</code></th>
+      <td>Zoom +10 percent points (Free Size)</td>
+    </tr>
+
+    <tr>
+      <th><code>-</code></th>
+      <td>Zoom -10 percent points (Free Size)</td>
+    </tr>
+
+    <tr>
+      <th><code># or 0</code></th>
+      <td>100% (Free Size)</td>
+    </tr>
+
+    <tr>
+      <th colspan="2" rowspan="1">Lossless
+Transformations</th>
+    </tr>
+
+    <tr>
+      <th><code>CTRL + Up</code></th>
+      <td colspan="1" rowspan="2">Lossless Rotate
+180&deg; (jpeg)</td>
+    </tr>
+
+    <tr>
+      <th><code>CTRL + Down</code></th>
+    </tr>
+
+    <tr>
+      <th><code>CTRL + Left<br />
+      </code></th>
+      <td colspan="1" rowspan="2">Lossless Rotate Left/Right (jpeg)</td>
+    </tr>
+
+    <tr>
+      <th><code>
+CTRL + Right</code></th>
+    </tr>
+
+    <tr>
+      <th><code>SHIFT + Up</code></th>
+      <td colspan="1" rowspan="2">Lossless Vertical
+Flip (jpeg)</td>
+    </tr>
+
+    <tr>
+      <th><code>SHIFT</code><code>&nbsp;+ Down</code></th>
+    </tr>
+
+    <tr>
+      <th><code>SHIFT</code><code>&nbsp;+ Left</code></th>
+      <td colspan="1" rowspan="2">Lossless
+Horizontal Flip (jpeg)</td>
+    </tr>
+
+    <tr>
+      <th><code>SHIFT</code><code>&nbsp;+ Right</code></th>
+    </tr>
+
+    <tr>
+      <th colspan="2" rowspan="1">Resampling method selection</th>
+    </tr>
+
+    <tr>
+      <th><code></code><code>Numbers</code></th>
+      <td>Corresponding method</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Shell Extension</h3>
+
+<ul>
+  <li>Configurable Thumbnail dimensions</li>
+  <li>Disable the in-menu Thumbnails altogether if you just want the other stuff.</li>
+  <li>Adds a page to the File Properties dialog detailing the image meta-data.</li>
+  <li>Adds a thumbnail maker component to the system, so that Explorer, etc. will be able to show thumbnails for supported file files, e.g. WebP.</li>
+
+</ul>
+
+<h2>Requirements</h2>
+
+<p>Minimal configuration</p>
+
+<ul>
+  <li><b>Windows Vista or later</b> - and I indeed mean this! XP is dead &mdash; Get over it ;)</li>
+  <li>CPU that supports SSE3 instructions (64-bit version only)</li>
+</ul>
+
+<h2>Misc. stuff</h2>
+
+<ul>
+  <li>You might have noticed by now that I hate writing manuals...</li>
+  <li>Pretty basic application in C/C++ without any frameworks (besides FreeImages and the XMP stuff).</li>
+  <li>Compiled using the Intel Compiler 14. If you're on AMD and the performance sucks, complain to Intel, not me ;(</li>
+  <li>There was a Version 1 developed in Borland C++Builder 6. Good times :p</li>
+  <li>Made in Germany &mdash; no, really!</li>
+  <li>Free in use, i.e. actually free; I don't monetize this application at all.</li>
+  <li><b>No support-ware!</b></li>
+</ul>
+
+<h2>Changes</h2>
+
+<p>See <a href="Changes.txt">Changes.txt</a></p>
+
+<h2>Legal stuff</h2>
+
+<pre>
+The MIT License (MIT)
+Copyright © 2006-2014, Nils Maier
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</pre>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+FastPreview Changes
+-------------------
+
+3.4
+* NEW: First open source release.
+* FIX: Fixed a scaling bug
+* NEW: Upgraded FreeImage3. This includes WebP support.
+* NEW: Upgraded build environment (MSVC12/ICC14)
+* NEW: Changed build to produce more optimized binaries.
+* NEW: Installing ProgIDs so you can easily switch to FP via Open with...
+* NEW: Providing Thumbnails for supported types in the Shell (Explorer, etc.)
+* NEW: Displaying MegaPixels (MP)

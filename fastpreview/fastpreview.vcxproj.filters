@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{3bf9c89a-242c-43c5-8ba1-225824c9c517}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Glue.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="MainWindow.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="WatcherThread.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="functions.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenDlg.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="WatcherThread.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="functions.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenDlg.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\icon\fp-limited.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

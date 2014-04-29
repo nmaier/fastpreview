@@ -1,0 +1,1 @@
+Stripped to the bare minimum by Nils Maier for FastPreview.

@@ -1,0 +1,205 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 3,4,0,0
+ PRODUCTVERSION 3,4,0,0
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "CompanyName", "Nils Maier"
+            VALUE "FileDescription", "FastPreview >> Viewer"
+            VALUE "FileVersion", "3.4.0.0"
+            VALUE "InternalName", "fastprev"
+            VALUE "LegalCopyright", "Copyright © 2006-2014 by Nils Maier"
+            VALUE "OriginalFilename", "fastpreview.exe"
+            VALUE "ProductName", "FastPreview"
+            VALUE "ProductVersion", "3.4.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200
+    END
+END
+
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_APP                 ICON                    "..\\icon\\fp-limited.ico"
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINCTX MENU
+BEGIN
+    POPUP "MCtx"
+    BEGIN
+        MENUITEM "&Open Another",               ID_MCTX_OPENANOTHER
+        MENUITEM SEPARATOR
+        MENUITEM "Switch",                      ID_MCTX_SWITCH
+        POPUP "Resample Method"
+        BEGIN
+            MENUITEM "Box",                         ID_RESAMPLEMETHOD_BOX
+            MENUITEM "Bilinear",                    ID_RESAMPLEMETHOD_BILINEAR
+            MENUITEM "Bicubic",                     ID_RESAMPLEMETHOD_BICUBIC
+            MENUITEM "B-Spline",                    ID_RESAMPLEMETHOD_BSPLINE
+            MENUITEM "Catmull-rom",                 ID_RESAMPLEMETHOD_CATMULL
+            MENUITEM "Lanczos3",                    ID_RESAMPLEMETHOD_LANCZOS3
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Explorer Menu",               ID_MCTX_EXPLORERMENU
+        MENUITEM "&Show Properties",            ID_MCTX_SHOWPROPERTIES
+        MENUITEM SEPARATOR
+        MENUITEM "&Execute",                    ID_MCTX_OPEN
+        POPUP "Looseless Transform"
+        BEGIN
+            MENUITEM "Rotate Left",                 ID_LOSSLESSTRANSFORM_LEFT
+            MENUITEM "Rotate Right",                ID_LOSSLESSTRANSFORM_RIGHT
+            MENUITEM "Rotate 180°",                 ID_LOSSLESSTRANSFORM_181
+            MENUITEM SEPARATOR
+            MENUITEM "Vertical Flip",               ID_LOSSLESSTRANSFORM_VERTICALFLIP
+            MENUITEM "Horizontal Flip",             ID_LOSSLESSTRANSFORM_HORIZONTALFLIP
+        END
+        MENUITEM "&Delete File",                ID_MCTX_DELETEFILE
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit",                       ID_MCTX_EXIT
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_ERR_GIVEFILE        "To use this application feed it with exactly one filename. ;)"
+    IDS_INFORMATION         "Information"
+    IDS_ERR_FILENOTFOUND    "File ""%1!s!"" was not found."
+    IDS_ERROR               "Error"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ERR_INIT            "Failed to initialize...\nMessage was:\n%1!s!"
+    IDS_ERR_INIT_UN         "Failed to initialize...\nUnknown error occured!"
+    IDS_MAINTITLE           "FastPreview Viewer » %1!s!"
+    IDS_SWITCH              "Switch to %1!s!"
+    IDS_SWITCH_BEST         "Best fit"
+    IDS_SWITCH_FREE         "Free size"
+    IDS_OPENING             "Opening file..."
+    IDS_QUITTING            "Quitting..."
+    IDS_DELETING            "Deleting file..."
+    IDS_EXPLORERMENU        "Showing Explorer menu"
+    IDS_LOADING             "Loading..."
+    IDS_ERR_LOAD            "Failed to load image..."
+    IDS_RESIZING            "Resizing image..."
+    IDS_ERR_UNSUPPORTED     "Unsupported Type"
+    IDS_INFOS               "%1!d!px • %2!d!px (%4!s! MB) — %3!s!"
+    IDS_SCALE               " (%1!d!%%)"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

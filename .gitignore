@@ -1,0 +1,14 @@
+Release*/
+Debug*/
+ipch/
+Out/
+screens/
+testimages/
+My Inspector XE Results*/
+*.ncb
+*.suo
+*.user
+*.*sdf
+*.obj
+*.bak
+Thumbs.db

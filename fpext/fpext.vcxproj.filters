@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="COM">
+      <UniqueIdentifier>{ae55b301-05b9-4870-8440-cedeacaeab47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="COM\Factories">
+      <UniqueIdentifier>{d7ff260e-3935-4895-9bed-e4f1883e874d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="COM\ShellExt">
+      <UniqueIdentifier>{c6664b17-c152-4bf7-b336-d86cc7726807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="COM\Toolkit">
+      <UniqueIdentifier>{aea61f51-3212-4ffa-8b04-2ecd2b607156}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Options">
+      <UniqueIdentifier>{5c581e45-97a0-419a-a13c-489250f40b69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DLL Stuff">
+      <UniqueIdentifier>{8f42c4d4-1286-4978-b779-f93a91d535bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Properties">
+      <UniqueIdentifier>{8caf840a-72ee-4c21-836b-642c1d66ce2b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Factory.cpp">
+      <Filter>COM\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="FPShellExt.cpp">
+      <Filter>COM\ShellExt</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionsDlg.cpp">
+      <Filter>Options</Filter>
+    </ClCompile>
+    <ClCompile Include="FPPropertyPage.cpp">
+      <Filter>Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="ComServers.cpp">
+      <Filter>COM\Toolkit</Filter>
+    </ClCompile>
+    <ClCompile Include="com.cpp">
+      <Filter>DLL Stuff</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>DLL Stuff</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FPShellExt.h">
+      <Filter>COM\ShellExt</Filter>
+    </ClInclude>
+    <ClInclude Include="ComServers.h">
+      <Filter>COM\Toolkit</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>DLL Stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="FPPropertyPage.h">
+      <Filter>Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>COM\Factories</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>DLL Stuff</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="comdef.def">
+      <Filter>DLL Stuff</Filter>
+    </None>
+    <None Include="comdef_wow.def">
+      <Filter>DLL Stuff</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\icon\fp-limited.ico">
+      <Filter>DLL Stuff</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
