@@ -28,3 +28,9 @@ After batch-building, feel free to build the `Setup` configuration to create MSI
 License
 --
 Original code is licensed under the MIT LICENSE. Also see the `License.*.txt` files regarding licensing of third-party stuff.
+
+Note
+--
+Please note that this stuff is essentially a mix of old "*let's write one of my first 
+C++ applications*" cruft and some more modern stuff.
+Also note that most parts of the code aren't mine; Most of FastPreview is just glue code to piece various bits together.
