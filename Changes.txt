@@ -1,7 +1,7 @@
 FastPreview Changes
 -------------------
 
-3.4
+4.0
 * NEW: First open source release.
 * FIX: Fixed a scaling bug
 * NEW: Upgraded FreeImage3. This includes WebP support.

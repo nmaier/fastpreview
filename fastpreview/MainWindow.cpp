@@ -801,7 +801,7 @@ HANDLERIMPL(OnSysCommand)
   if (wparam == WM_USER) {
     MessageBox(
       hwnd_,
-      _T("FastPreview 3.4\n\n© 2006-2014 by Nils Maier\n\nSee the License.* files for more licensing information."),
+      _T("FastPreview 4.0\n\n© 2006-2014 by Nils Maier\n\nSee the License.* files for more licensing information."),
       _T("About"),
       MB_ICONINFORMATION
       );
