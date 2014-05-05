@@ -473,7 +473,10 @@ IFACEMETHODIMP IFPShellExt::AddPages(LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM lP
     lpfnAddPage((new FPPropertyPage(this, path_, grefcnt))->getHandle(), lParam);
   }
   catch (const std::wstring& ex) {
+#ifdef _DEBUG
     ::MessageBox(nullptr, ex.c_str(), s_error.c_str(), MB_ICONERROR);
+#endif
+    dump(L"%s", ex);
   }
   catch (...) {
     // no op
