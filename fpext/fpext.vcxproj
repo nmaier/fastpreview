@@ -173,7 +173,7 @@
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
-      <AdditionalIncludeDirectories>..\libResample;..\libRegistry;..\shared;..\FreeImage\Wrapper\FreeImagePlus;..\FreeImage\Source;..\TinyXMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\libResample;..\libRegistry;..\libShared;..\FreeImage\Wrapper\FreeImagePlus;..\FreeImage\Source;..\TinyXMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_WIN32_WINNT=0x0502;WINVER=0x0502;_WIN32_IE=0x600;ISOLATION_AWARE_ENABLED=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <MinimalRebuild>true</MinimalRebuild>
@@ -206,7 +206,7 @@
     <Midl />
     <ClCompile>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
-      <AdditionalIncludeDirectories>..\libResample;..\libRegistry;..\shared;..\FreeImage\Wrapper\FreeImagePlus;..\FreeImage\Source;..\TinyXMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\libResample;..\libRegistry;..\libShared;..\FreeImage\Wrapper\FreeImagePlus;..\FreeImage\Source;..\TinyXMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_WIN32_WINNT=0x0502;WINVER=0x0502;_WIN32_IE=0x600;ISOLATION_AWARE_ENABLED=1;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <PrecompiledHeader>
@@ -252,7 +252,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>..\libResample;..\libRegistry;..\shared;..\FreeImage\Wrapper\FreeImagePlus;..\FreeImage\Source;..\TinyXMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\libResample;..\libRegistry;..\libShared;..\FreeImage\Wrapper\FreeImagePlus;..\FreeImage\Source;..\TinyXMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_WIN32_WINNT=0x0502;WINVER=0x0502;_WIN32_IE=0x600;RELEASE;NDEBUG;FREEIMAGE_LIB;ISOLATION_AWARE_ENABLED=1;MODULE=L$(TargetName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -300,7 +300,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>..\libResample;..\libRegistry;..\shared;..\FreeImage\Wrapper\FreeImagePlus;..\FreeImage\Source;..\TinyXMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\libResample;..\libRegistry;..\libShared;..\FreeImage\Wrapper\FreeImagePlus;..\FreeImage\Source;..\TinyXMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_WIN32_WINNT=0x0502;WINVER=0x0502;_WIN32_IE=0x600;RELEASE;NDEBUG;FREEIMAGE_LIB;ISOLATION_AWARE_ENABLED=1;MODULE=L$(TargetName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -346,7 +346,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>..\libResample;..\libRegistry;..\shared;..\FreeImage\Wrapper\FreeImagePlus;..\FreeImage\Source;..\TinyXMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\libResample;..\libRegistry;..\libShared;..\FreeImage\Wrapper\FreeImagePlus;..\FreeImage\Source;..\TinyXMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_WIN32_WINNT=0x0502;WINVER=0x0502;_WIN32_IE=0x600;RELEASE;NDEBUG;FREEIMAGE_LIB;ISOLATION_AWARE_ENABLED=1;MODULE=L$(TargetName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -392,7 +392,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>..\libResample;..\libRegistry;..\shared;..\FreeImage\Wrapper\FreeImagePlus;..\FreeImage\Source;..\TinyXMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\libResample;..\libRegistry;..\libShared;..\FreeImage\Wrapper\FreeImagePlus;..\FreeImage\Source;..\TinyXMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_WIN32_WINNT=0x0502;WINVER=0x0502;_WIN32_IE=0x600;RELEASE;NDEBUG;FREEIMAGE_LIB;ISOLATION_AWARE_ENABLED=1;MODULE=L$(TargetName);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <BufferSecurityCheck>false</BufferSecurityCheck>

@@ -371,20 +371,22 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\fastpreview\Console.cpp" />
-    <ClCompile Include="..\shared\inteldispatch.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    <ClCompile Include="console.cpp" />
+    <ClCompile Include="inteldispatch.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='WOW|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='WOW|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\shared\stringtools.cpp" />
+    <ClCompile Include="stringtools.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\fastpreview\Console.h" />
-    <ClInclude Include="..\fastpreview\FileAttr.h" />
-    <ClInclude Include="..\shared\procpriority.h" />
-    <ClInclude Include="..\shared\stringtools.h" />
+    <ClInclude Include="console.h" />
+    <ClInclude Include="FileAttr.h" />
+    <ClInclude Include="procpriority.h" />
+    <ClInclude Include="stringtools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

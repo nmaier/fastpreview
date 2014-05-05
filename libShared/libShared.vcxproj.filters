@@ -15,27 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\fastpreview\Console.cpp">
+    <ClCompile Include="inteldispatch.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\shared\stringtools.cpp">
+    <ClCompile Include="stringtools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\shared\inteldispatch.c">
+    <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\fastpreview\Console.h">
+    <ClInclude Include="stringtools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\fastpreview\FileAttr.h">
+    <ClInclude Include="procpriority.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\shared\stringtools.h">
+    <ClInclude Include="FileAttr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\shared\procpriority.h">
+    <ClInclude Include="console.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
