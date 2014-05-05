@@ -13,6 +13,7 @@
 #include "Messages.h"
 #include "Objects.h"
 #include "Rect.h"
+#include "procpriority.h"
 
 /* timers */
 #define IDT_RELOAD   1
@@ -1017,8 +1018,13 @@ void MainWindow::LoadFile()
   fileAttr_ = FileAttr(file_);
 
   img_.clear();
+  bool load;
+  {
+    Priority prio(HIGH_PRIORITY_CLASS);
+    load = img_.load(file_.c_str());
+  }
 
-  if (!img_.load(file_.c_str())) {
+  if (!load) {
     sp_.x = sp_.y = 0;
     clientHeight_ = clientWidth_ = 400;
 

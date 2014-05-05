@@ -35,5 +35,8 @@
     <ClInclude Include="..\shared\stringtools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\shared\procpriority.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

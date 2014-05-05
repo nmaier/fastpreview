@@ -383,6 +383,7 @@
   <ItemGroup>
     <ClInclude Include="..\fastpreview\Console.h" />
     <ClInclude Include="..\fastpreview\FileAttr.h" />
+    <ClInclude Include="..\shared\procpriority.h" />
     <ClInclude Include="..\shared\stringtools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
