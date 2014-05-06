@@ -27,14 +27,8 @@
     <ClCompile Include="Factory.cpp">
       <Filter>COM\Factories</Filter>
     </ClCompile>
-    <ClCompile Include="FPShellExt.cpp">
-      <Filter>COM\ShellExt</Filter>
-    </ClCompile>
     <ClCompile Include="OptionsDlg.cpp">
       <Filter>Options</Filter>
-    </ClCompile>
-    <ClCompile Include="FPPropertyPage.cpp">
-      <Filter>Properties</Filter>
     </ClCompile>
     <ClCompile Include="ComServers.cpp">
       <Filter>COM\Toolkit</Filter>
@@ -45,22 +39,28 @@
     <ClCompile Include="main.cpp">
       <Filter>DLL Stuff</Filter>
     </ClCompile>
+    <ClCompile Include="ShellExt.cpp">
+      <Filter>COM\ShellExt</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyPage.cpp">
+      <Filter>Properties</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FPShellExt.h">
-      <Filter>COM\ShellExt</Filter>
-    </ClInclude>
     <ClInclude Include="ComServers.h">
       <Filter>COM\Toolkit</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>DLL Stuff</Filter>
     </ClInclude>
-    <ClInclude Include="FPPropertyPage.h">
-      <Filter>Properties</Filter>
-    </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>COM\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="ShellExt.h">
+      <Filter>COM\ShellExt</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyPage.h">
+      <Filter>Properties</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,9 +3,9 @@
 
 #include "ComServers.h"
 #include "stringtools.h"
-#include "FPShellExt.h"
+#include "ShellExt.h"
 
-IFACEMETHODIMP IFPFactory::QueryInterface(const IID& iid, LPVOID* ppv)
+IFACEMETHODIMP Factory::QueryInterface(const IID& iid, LPVOID* ppv)
 {
   dump(L"Factory");
   if ((iid != IID_IUnknown) && (iid != IID_IClassFactory)) {
@@ -17,12 +17,12 @@ IFACEMETHODIMP IFPFactory::QueryInterface(const IID& iid, LPVOID* ppv)
   return S_OK;
 }
 
-IFACEMETHODIMP_(ULONG) IFPFactory::AddRef()
+IFACEMETHODIMP_(ULONG) Factory::AddRef()
 {
   return ::InterlockedIncrement(&refcnt_);
 }
 
-IFACEMETHODIMP_(ULONG) IFPFactory::Release()
+IFACEMETHODIMP_(ULONG) Factory::Release()
 {
   if (::InterlockedDecrement(&refcnt_) == 0) {
     delete this;
@@ -31,7 +31,7 @@ IFACEMETHODIMP_(ULONG) IFPFactory::Release()
   return refcnt_;
 }
 
-IFACEMETHODIMP IFPFactory::CreateInstance(IUnknown* pUnkOuter, REFIID iid, void** ppv)
+IFACEMETHODIMP Factory::CreateInstance(IUnknown* pUnkOuter, REFIID iid, void** ppv)
 {
   dump(L"CreateInstance");
 
@@ -39,7 +39,7 @@ IFACEMETHODIMP IFPFactory::CreateInstance(IUnknown* pUnkOuter, REFIID iid, void*
     dump(L"CreateInstance - NoAggr");
     return CLASS_E_NOAGGREGATION;
   }
-  IFPShellExt* inst = new(std::nothrow) IFPShellExt();
+  ShellExt* inst = new(std::nothrow) ShellExt();
 
   if (!inst) {
     dump(L"CreateInstance - OOM");
@@ -59,7 +59,7 @@ IFACEMETHODIMP IFPFactory::CreateInstance(IUnknown* pUnkOuter, REFIID iid, void*
   return hr;
 }
 
-IFACEMETHODIMP IFPFactory::LockServer(BOOL bLock)
+IFACEMETHODIMP Factory::LockServer(BOOL bLock)
 {
   bLock ? AddRef() : Release();
   return S_OK;
@@ -67,14 +67,14 @@ IFACEMETHODIMP IFPFactory::LockServer(BOOL bLock)
 
 extern "C" HRESULT RegisterServers()
 {
-  return COMServers::Register(IFP_PROGID, IFP_DESC, IFP_VERSION, cIFPShellExt)
+  return COMServers::Register(IFP_PROGID, IFP_DESC, IFP_VERSION, cShellExt)
     ? S_OK
     : SELFREG_E_CLASS;
 }
 
 extern "C" HRESULT UnregisterServers()
 {
-  return COMServers::Unregister(IFP_PROGID, IFP_VERSION, cIFPShellExt)
+  return COMServers::Unregister(IFP_PROGID, IFP_VERSION, cShellExt)
     ? S_OK
     : SELFREG_E_CLASS;
 }

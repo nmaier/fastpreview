@@ -1,13 +1,12 @@
-#include "FPPropertyPage.h"
+#include "PropertyPage.h"
 
 #include <sstream>
 #include <strsafe.h>
 
-#include "FPShellExt.h"
+#include "ShellExt.h"
 #include "ComServers.h"
 #include "stringtools.h"
 #include "resource.h"
-#include "FPShellExt.h"
 #include "TinyXMP.h""
 
 typedef struct _secstruct_t
@@ -29,12 +28,12 @@ static secstruct_t sections[] = {
   { L"Exif Interop", FIMD_EXIF_INTEROP },
 };
 
-const std::wstring FPPropertyPage::title = stringtools::loadResourceString(IDS_FASTPREVIEW);
-const std::wstring FPPropertyPage::col_type = stringtools::loadResourceString(IDS_COL_TYPE);
-const std::wstring FPPropertyPage::col_value = stringtools::loadResourceString(IDS_COL_VALUE);
+const std::wstring PropertyPage::title = stringtools::loadResourceString(IDS_FASTPREVIEW);
+const std::wstring PropertyPage::col_type = stringtools::loadResourceString(IDS_COL_TYPE);
+const std::wstring PropertyPage::col_value = stringtools::loadResourceString(IDS_COL_VALUE);
 
-FPPropertyPage::FPPropertyPage(
-  IFPShellExt *ext, const std::wstring& aFile, UINT& ref)
+PropertyPage::PropertyPage(
+  ShellExt *ext, const std::wstring& aFile, UINT& ref)
   : file_(aFile), hwnd_(nullptr), hlist_(nullptr), ext_(ext)
 {
   if (!img_.load(file_) || !img_.makeThumbnail(96, 96)) {
@@ -74,7 +73,7 @@ FPPropertyPage::FPPropertyPage(
   }
 }
 
-FPPropertyPage::~FPPropertyPage()
+PropertyPage::~PropertyPage()
 {
   if (ext_) {
     ext_->Release();
@@ -83,17 +82,17 @@ FPPropertyPage::~FPPropertyPage()
 }
 
 #define PAGE_PTR L"FPPropPage"
-INT_PTR CALLBACK FPPropertyPage::proc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
+INT_PTR CALLBACK PropertyPage::proc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
-  FPPropertyPage *page = nullptr;
+  PropertyPage *page = nullptr;
 
   if (msg == WM_INITDIALOG) {
-    page = reinterpret_cast<FPPropertyPage*>(reinterpret_cast<PROPSHEETPAGE*>(lparam)->lParam);
+    page = reinterpret_cast<PropertyPage*>(reinterpret_cast<PROPSHEETPAGE*>(lparam)->lParam);
     page->hwnd_ = hwnd;
     ::SetProp(hwnd, PAGE_PTR, (HANDLE)page);
   }
   else {
-    page = reinterpret_cast<FPPropertyPage*>(::GetProp(hwnd, PAGE_PTR));
+    page = reinterpret_cast<PropertyPage*>(::GetProp(hwnd, PAGE_PTR));
   }
 
   if (page != 0) {
@@ -103,17 +102,17 @@ INT_PTR CALLBACK FPPropertyPage::proc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM
   return FALSE;
 }
 
-UINT CALLBACK FPPropertyPage::callbackProc(HWND hwnd, UINT msg, LPPROPSHEETPAGE lparam)
+UINT CALLBACK PropertyPage::callbackProc(HWND hwnd, UINT msg, LPPROPSHEETPAGE lparam)
 {
   if (msg == PSPCB_RELEASE) {
     ::RemoveProp(hwnd, PAGE_PTR);
-    delete reinterpret_cast<FPPropertyPage*>(lparam->lParam);
+    delete reinterpret_cast<PropertyPage*>(lparam->lParam);
     lparam->lParam = 0;
   }
   return 1;
 }
 
-INT_PTR FPPropertyPage::loop(UINT msg, WPARAM wparam, LPARAM lparam)
+INT_PTR PropertyPage::loop(UINT msg, WPARAM wparam, LPARAM lparam)
 {
   switch (msg) {
   case WM_INITDIALOG:
@@ -179,7 +178,7 @@ INT_PTR FPPropertyPage::loop(UINT msg, WPARAM wparam, LPARAM lparam)
     if (GetWindowRect(GetDlgItem(hwnd_, IDC_THUMB), &cr) &&
       GetWindowRect(hwnd_, &wr) && OffsetRect(&cr, -wr.left, -wr.top) &&
       PtInRect(&cr, pt)) {
-      IFPShellExt::createView(hwnd_, file_);
+      ShellExt::createView(hwnd_, file_);
       return TRUE;
     }
     break;
@@ -215,7 +214,7 @@ namespace {
   }
 }
 
-void FPPropertyPage::init()
+void PropertyPage::init()
 {
   SetDlgItemText(hwnd_, IDC_FILE, file_.c_str());
 
@@ -415,7 +414,7 @@ exit:
   CloseClipboard();
 }
 
-void FPPropertyPage::handleCommand(WPARAM wparam, LPARAM lparam)
+void PropertyPage::handleCommand(WPARAM wparam, LPARAM lparam)
 {
   const int idx = ListView_GetSelectionMark(hlist_);
   std::wstringstream ss;
@@ -508,7 +507,7 @@ void FPPropertyPage::handleCommand(WPARAM wparam, LPARAM lparam)
   } // switch
 }
 
-void FPPropertyPage::drawImg(LPDRAWITEMSTRUCT dis)
+void PropertyPage::drawImg(LPDRAWITEMSTRUCT dis)
 {
   if (dis == 0) {
     return;

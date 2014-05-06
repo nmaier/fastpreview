@@ -424,7 +424,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Factory.cpp" />
-    <ClCompile Include="FPShellExt.cpp" />
+    <ClCompile Include="ShellExt.cpp" />
     <ClCompile Include="ComServers.cpp" />
     <ClCompile Include="OptionsDlg.cpp" />
     <ClCompile Include="com.cpp">
@@ -439,14 +439,14 @@
       <InterproceduralOptimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SingleFile</InterproceduralOptimization>
       <InterproceduralOptimization Condition="'$(Configuration)|$(Platform)'=='WOW|x64'">SingleFile</InterproceduralOptimization>
     </ClCompile>
-    <ClCompile Include="FPPropertyPage.cpp" />
+    <ClCompile Include="PropertyPage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Factory.h" />
-    <ClInclude Include="FPShellExt.h" />
+    <ClInclude Include="ShellExt.h" />
     <ClInclude Include="ComServers.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="FPPropertyPage.h" />
+    <ClInclude Include="PropertyPage.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />

@@ -4,7 +4,7 @@
 #include <shlobj.h>
 #include <comdef.h>
 
-class IFPFactory : public IClassFactory
+class Factory : public IClassFactory
 {
 public:
   // IUnknown
@@ -17,10 +17,10 @@ public:
     IUnknown* pUnkOuter, REFIID iid, void** ppv);
   virtual IFACEMETHODIMP LockServer(BOOL bLock);
 
-  IFPFactory() : refcnt_(1)
+  Factory() : refcnt_(1)
   {}
 
-  virtual ~IFPFactory()
+  virtual ~Factory()
   {}
 
 private:

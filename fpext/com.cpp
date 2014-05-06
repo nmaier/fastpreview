@@ -1,7 +1,7 @@
 #include <objbase.h>
 
 #include "Factory.h"
-#include "FPShellExt.h"
+#include "ShellExt.h"
 #include "ComServers.h"
 #include "stringtools.h"
 
@@ -15,11 +15,11 @@ STDAPI DllCanUnloadNow(void)
 _Check_return_
 STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv)
 {
-  if (rclsid != IID_IFPShellExt) {
+  if (rclsid != IID_ShellExt) {
     return CLASS_E_CLASSNOTAVAILABLE;
   }
 
-  IFPFactory* factory = new(std::nothrow) IFPFactory();
+  Factory* factory = new(std::nothrow) Factory();
   if (!factory) {
     return E_OUTOFMEMORY;
   }

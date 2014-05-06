@@ -1,5 +1,6 @@
-#ifndef FPPROPERTYPAGE_H
-#define FPPROPERTYPAGE_H
+#ifndef PropertyPage_H
+#define PropertyPage_H
+#pragma once
 
 #include <windows.h>
 #include <string>
@@ -9,9 +10,9 @@
 #include "stringtools.h"
 #include "resource.h"
 
-class IFPShellExt;
+class ShellExt;
 
-class FPPropertyPage {
+class PropertyPage {
 private:
 	static const std::wstring title;
 	static const std::wstring col_type;
@@ -21,7 +22,7 @@ private:
 	FreeImage::WinImage img_;
 	HPROPSHEETPAGE handle_;
 	HWND hwnd_, hlist_;
-  IFPShellExt *ext_;
+  ShellExt *ext_;
 	
 	static INT_PTR CALLBACK proc(
     HWND hwnd, UINT uMessage, WPARAM wParam, LPARAM lParam);
@@ -33,8 +34,8 @@ private:
 	void drawImg(LPDRAWITEMSTRUCT dis);
 
 public:
-	FPPropertyPage(IFPShellExt* ext, const std::wstring& file, UINT& ref);
-	virtual ~FPPropertyPage();
+	PropertyPage(ShellExt* ext, const std::wstring& file, UINT& ref);
+	virtual ~PropertyPage();
 
 	HPROPSHEETPAGE getHandle() const {
 		return handle_;

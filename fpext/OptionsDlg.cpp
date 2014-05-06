@@ -1,4 +1,4 @@
-#include "FPShellExt.h"
+#include "ShellExt.h"
 #include "resource.h"
 #include "stringtools.h"
 
@@ -14,7 +14,7 @@ namespace {
 
 DWORD WINAPI OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-  IFPShellExt *owner = (IFPShellExt*)GetProp(hDlg, L"owner");
+  ShellExt *owner = (ShellExt*)GetProp(hDlg, L"owner");
   switch (msg) {
   case WM_INITDIALOG: {
     SetProp(hDlg, L"owner", (HANDLE)lParam);

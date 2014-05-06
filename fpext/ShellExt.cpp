@@ -1,4 +1,4 @@
-#include "FPShellExt.h"
+#include "ShellExt.h"
 
 #include <stdio.h>
 #include <strsafe.h>
@@ -8,7 +8,7 @@
 #include "ComServers.h"
 #include "stringtools.h"
 #include "resource.h"
-#include "FPPropertyPage.h"
+#include "PropertyPage.h"
 #include "Registry.h"
 
 namespace {
@@ -18,9 +18,9 @@ namespace {
   static const std::wstring s_fastpreview = stringtools::loadResourceString(IDS_FASTPREVIEW);
 };
 
-UINT IFPShellExt::grefcnt = 0;
+UINT ShellExt::grefcnt = 0;
 
-IFPShellExt::IFPShellExt()
+ShellExt::ShellExt()
 : refcnt_(0), reg_(HKEY_CURRENT_USER, L"Software\\MaierSoft\\FastPreview"), alpha_(WTSAT_UNKNOWN),
 width_(300), height_(300), maxSize_(1 << 25), showThumb_(true)
 {
@@ -37,7 +37,7 @@ width_(300), height_(300), maxSize_(1 << 25), showThumb_(true)
   InitCommonControlsEx(&cc);
 }
 
-void IFPShellExt::initializeFromRegistry()
+void ShellExt::initializeFromRegistry()
 {
   uint32_t tmp = 0;
   if (reg_.get(L"extThumbWidth", tmp) && tmp > 32 && tmp < 2000) {
@@ -52,13 +52,13 @@ void IFPShellExt::initializeFromRegistry()
   }
 }
 
-IFPShellExt::~IFPShellExt()
+ShellExt::~ShellExt()
 {
   --grefcnt;
   CoUninitialize();
 }
 
-IFACEMETHODIMP IFPShellExt::QueryInterface(REFIID iid, void ** ppv)
+IFACEMETHODIMP ShellExt::QueryInterface(REFIID iid, void ** ppv)
 {
   if (!ppv) {
     return E_INVALIDARG;
@@ -89,13 +89,13 @@ IFACEMETHODIMP IFPShellExt::QueryInterface(REFIID iid, void ** ppv)
   return E_NOINTERFACE;
 }
 
-ULONG __stdcall IFPShellExt::AddRef(void)
+ULONG __stdcall ShellExt::AddRef(void)
 {
   return InterlockedIncrement((LONG *)&refcnt_);
 
 }
 
-ULONG __stdcall IFPShellExt::Release(void)
+ULONG __stdcall ShellExt::Release(void)
 {
   if (!InterlockedDecrement((LONG *)&refcnt_)) {
     delete this;
@@ -105,7 +105,7 @@ ULONG __stdcall IFPShellExt::Release(void)
 }
 
 // IShellExtInit
-IFACEMETHODIMP IFPShellExt::Initialize(LPCITEMIDLIST pidlFolder, IDataObject *pDataObj, HKEY hkeyProgID)
+IFACEMETHODIMP ShellExt::Initialize(LPCITEMIDLIST pidlFolder, IDataObject *pDataObj, HKEY hkeyProgID)
 {
   image_.clear();
 
@@ -148,7 +148,7 @@ IFACEMETHODIMP IFPShellExt::Initialize(LPCITEMIDLIST pidlFolder, IDataObject *pD
 }
 
 // IInitializeWithItem
-IFACEMETHODIMP IFPShellExt::Initialize(IShellItem *psi, DWORD grfMode)
+IFACEMETHODIMP ShellExt::Initialize(IShellItem *psi, DWORD grfMode)
 {
   dump(L"InitializeWithItem");
   image_.clear();
@@ -175,7 +175,7 @@ IFACEMETHODIMP IFPShellExt::Initialize(IShellItem *psi, DWORD grfMode)
 }
 
 // IntialzeWithFile
-IFACEMETHODIMP IFPShellExt::Initialize(LPCWSTR pszFilePath, DWORD grfMode)
+IFACEMETHODIMP ShellExt::Initialize(LPCWSTR pszFilePath, DWORD grfMode)
 {
   if (!pszFilePath) {
     return E_INVALIDARG;
@@ -186,7 +186,7 @@ IFACEMETHODIMP IFPShellExt::Initialize(LPCWSTR pszFilePath, DWORD grfMode)
 }
 
 // InitializeWithStream
-IFACEMETHODIMP IFPShellExt::Initialize(IStream *pstream, DWORD grfMode)
+IFACEMETHODIMP ShellExt::Initialize(IStream *pstream, DWORD grfMode)
 {
   if (!pstream) {
     return E_INVALIDARG;
@@ -198,7 +198,7 @@ IFACEMETHODIMP IFPShellExt::Initialize(IStream *pstream, DWORD grfMode)
 }
 
 // IContextMenu
-IFACEMETHODIMP IFPShellExt::GetCommandString(
+IFACEMETHODIMP ShellExt::GetCommandString(
   UINT_PTR idCmd, UINT uFlags, UINT *pwReserved, LPSTR pszName, UINT cchMax)
 {
   switch (uFlags) {
@@ -222,7 +222,7 @@ IFACEMETHODIMP IFPShellExt::GetCommandString(
   return E_NOTIMPL;
 }
 
-void IFPShellExt::createView(HWND hwnd, const std::wstring& path)
+void ShellExt::createView(HWND hwnd, const std::wstring& path)
 {
   auto prog = COMServers::ModuleDirectory();
   prog.append(L"fastpreview.exe");
@@ -278,7 +278,7 @@ namespace {
   }
 }
 
-void IFPShellExt::showOptions(HWND hWnd)
+void ShellExt::showOptions(HWND hWnd)
 {
   auto rv = DialogBoxParam(
     COMServers::GetModuleHandle(),
@@ -292,7 +292,7 @@ void IFPShellExt::showOptions(HWND hWnd)
   }
 }
 
-IFACEMETHODIMP IFPShellExt::InvokeCommand(LPCMINVOKECOMMANDINFO pCmdInfo)
+IFACEMETHODIMP ShellExt::InvokeCommand(LPCMINVOKECOMMANDINFO pCmdInfo)
 {
   if (HIWORD(pCmdInfo->lpVerb)) {
     return E_INVALIDARG;
@@ -312,7 +312,7 @@ IFACEMETHODIMP IFPShellExt::InvokeCommand(LPCMINVOKECOMMANDINFO pCmdInfo)
   }
 }
 
-IFACEMETHODIMP IFPShellExt::QueryContextMenu(
+IFACEMETHODIMP ShellExt::QueryContextMenu(
   HMENU hmenu, UINT indexMenu, UINT idCmdFirst, UINT idCmdLast, UINT uFlags)
 {
   if (!showThumb_) {
@@ -366,14 +366,14 @@ IFACEMETHODIMP IFPShellExt::QueryContextMenu(
 }
 
 // IContextMenu2
-IFACEMETHODIMP IFPShellExt::HandleMenuMsg(
+IFACEMETHODIMP ShellExt::HandleMenuMsg(
   UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
   return HandleMenuMsg2(uMsg, wParam, lParam, nullptr);
 }
 
 // IContextMenu2
-IFACEMETHODIMP IFPShellExt::HandleMenuMsg2(
+IFACEMETHODIMP ShellExt::HandleMenuMsg2(
   UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT *lpResult)
 {
 #define SR(x) if (lpResult) *lpResult = x;
@@ -467,10 +467,10 @@ IFACEMETHODIMP IFPShellExt::HandleMenuMsg2(
   return E_FAIL;
 }
 
-IFACEMETHODIMP IFPShellExt::AddPages(LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM lParam)
+IFACEMETHODIMP ShellExt::AddPages(LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM lParam)
 {
   try {
-    lpfnAddPage((new FPPropertyPage(this, path_, grefcnt))->getHandle(), lParam);
+    lpfnAddPage((new PropertyPage(this, path_, grefcnt))->getHandle(), lParam);
   }
   catch (const std::wstring& ex) {
 #ifdef _DEBUG
@@ -485,7 +485,7 @@ IFACEMETHODIMP IFPShellExt::AddPages(LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM lP
   return S_OK;
 }
 
-IFACEMETHODIMP IFPShellExt::ReplacePage(UINT, LPFNADDPROPSHEETPAGE, LPARAM)
+IFACEMETHODIMP ShellExt::ReplacePage(UINT, LPFNADDPROPSHEETPAGE, LPARAM)
 {
   return E_NOTIMPL;
 }
@@ -547,7 +547,7 @@ namespace {
   };
 }
 
-IFACEMETHODIMP IFPShellExt::GetThumbnail(
+IFACEMETHODIMP ShellExt::GetThumbnail(
   UINT cx, HBITMAP *phbmp, WTS_ALPHATYPE *pdwAlpha)
 {
   dump(L"GetThumbnail");

@@ -1,6 +1,6 @@
+#ifndef SHELLEXT_H
+#define SHELLEXT_H
 #pragma once
-#ifndef FPSHELLEXT_H
-#define FPSHELLEXT_H
 
 #include <windows.h>
 #include <shlobj.h>
@@ -12,19 +12,19 @@
 #include <memory>
 
 // {FD669B05-A3B7-425c-99C8-64CD0A270CE1}
-static const GUID IID_IFPShellExt = {
+static const GUID IID_ShellExt = {
   0xfd669b05, 0xa3b7, 0x425c,
   { 0x99, 0xc8, 0x64, 0xcd, 0xa, 0x27, 0xc, 0xe1 }
 };
-static const wchar_t cIFPShellExt[] = L"{FD669B05-A3B7-425c-99C8-64CD0A270CE1}";
+static const wchar_t cShellExt[] = L"{FD669B05-A3B7-425c-99C8-64CD0A270CE1}";
 
 #define IFP_DESC L"FastPreview ShellExt Server"
 #define IFP_VERSION 3
-#define IFP_PROGID L"FastPreview.IFPShellExt"
+#define IFP_PROGID L"FastPreview.ShellExt"
 
 extern HINSTANCE gModThis;
 
-class IFPShellExt
+class ShellExt
   : public IShellExtInit, public IContextMenu3, public IShellPropSheetExt,
   public IThumbnailProvider, public IInitializeWithItem,
   public IInitializeWithStream, public IInitializeWithFile
@@ -32,8 +32,8 @@ class IFPShellExt
   friend DWORD WINAPI OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 
 public:
-  IFPShellExt();
-  ~IFPShellExt();
+  ShellExt();
+  ~ShellExt();
 
   virtual IFACEMETHODIMP QueryInterface(REFIID iid, void ** ppvObject);
   virtual IFACEMETHODIMP_(ULONG) AddRef(void);
@@ -78,7 +78,7 @@ public:
 
   void initializeFromRegistry();
 
-  static void IFPShellExt::createView(HWND hwnd, const std::wstring& path);
+  static void ShellExt::createView(HWND hwnd, const std::wstring& path);
 
 private:
   struct releaser
@@ -106,9 +106,9 @@ private:
   uint32_t maxSize_;
   bool showThumb_;
 
-  void IFPShellExt::showOptions(HWND hWnd);
+  void ShellExt::showOptions(HWND hWnd);
 };
 
 extern DWORD WINAPI OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 
-#endif
+#endif // SHELLEXT_H
