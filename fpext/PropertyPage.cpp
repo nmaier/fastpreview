@@ -118,6 +118,7 @@ INT_PTR PropertyPage::loop(UINT msg, WPARAM wparam, LPARAM lparam)
   case WM_INITDIALOG:
     init();
     return TRUE;
+
   case WM_DRAWITEM:
     switch (wparam) {
     case IDC_THUMB:
@@ -125,6 +126,7 @@ INT_PTR PropertyPage::loop(UINT msg, WPARAM wparam, LPARAM lparam)
       return TRUE;
     }
     break;
+
   case WM_CONTEXTMENU: {
     if (GetDlgItem(hwnd_, IDC_DATA) != reinterpret_cast<HWND>(wparam) ||
       !ListView_GetItemCount(hlist_)) {
@@ -208,6 +210,8 @@ namespace {
       default:
         lastIsWhitespace = false;
         ss << ch;
+        break;
+
       }
     }
     return ss.str();
@@ -491,7 +495,7 @@ void PropertyPage::handleCommand(WPARAM wparam, LPARAM lparam)
     putIntoClipboard(hwnd_, ss.str());
     break;
 
-  case IDC_BUTTON_OPTIONS: {
+  case IDC_BUTTON_OPTIONS:
     if (ext_ && ::DialogBoxParam(
       COMServers::GetModuleHandle(),
       MAKEINTRESOURCE(IDD_OPTIONS),
@@ -502,16 +506,16 @@ void PropertyPage::handleCommand(WPARAM wparam, LPARAM lparam)
       ext_->initializeFromRegistry();
     }
     break;
-  }
 
   } // switch
 }
 
 void PropertyPage::drawImg(LPDRAWITEMSTRUCT dis)
 {
-  if (dis == 0) {
+  if (!dis) {
     return;
   }
+
   RECT& r = dis->rcItem;
 
   DrawFrameControl(

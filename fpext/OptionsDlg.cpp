@@ -191,8 +191,8 @@ DWORD WINAPI OptionsDlgProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
         );
 
       EndDialog(hDlg, TRUE);
-    }
       return TRUE;
+    }
 
     case IDCANCEL:
       EndDialog(hDlg, FALSE);

@@ -28,26 +28,29 @@ void  __cdecl dump(const wchar_t* fmt, ...)
 
 string stringtools::WStringToString(const wchar_t *aIn)
 {
-  const int x = WideCharToMultiByte(CP_ACP, 0, aIn, -1, NULL, 0, NULL, NULL);
-  if (x == 0) {
+  auto rv = ::WideCharToMultiByte(
+    CP_ACP, 0, aIn, -1, nullptr, 0, nullptr, nullptr);
+  if (rv == 0) {
     return "";
   }
 
-  auto buf = make_unique <char[]>(x + 1);
-  string rv;
-  if (WideCharToMultiByte(CP_ACP, 0, aIn, -1, buf.get(), x + 1, NULL, NULL)) {
-    rv = buf.get();
+  auto buf = make_unique<char[]>(++rv);
+  string str;
+  rv = ::WideCharToMultiByte(
+    CP_ACP, 0, aIn, -1, buf.get(), rv, nullptr, nullptr);
+  if (rv) {
+    str = buf.get();
   }
-  return rv;
+  return str;
 }
 
 wstring stringtools::StringToWString(const char *aIn, unsigned int codePage)
 {
-  const int x = MultiByteToWideChar(codePage, 0, aIn, -1, NULL, 0);
-  auto buf = make_unique<wchar_t[]>(x + 1);
-  wstring rv;
-  if (MultiByteToWideChar(codePage, 0, aIn, -1, buf.get(), x + 1)) {
-    rv = buf.get();
+  auto rv = ::MultiByteToWideChar(codePage, 0, aIn, -1, nullptr, 0);
+  auto buf = make_unique<wchar_t[]>(++rv);
+  wstring str;
+  if (::MultiByteToWideChar(codePage, 0, aIn, -1, buf.get(), rv)) {
+    str = buf.get();
   }
-  return rv;
+  return str;
 }

@@ -24,7 +24,8 @@ ShellExt::ShellExt()
 : refcnt_(0), reg_(HKEY_CURRENT_USER, L"Software\\MaierSoft\\FastPreview"), alpha_(WTSAT_UNKNOWN),
 width_(300), height_(300), maxSize_(1 << 25), showThumb_(true)
 {
-  (void)CoInitialize(nullptr);
+  (void)::CoInitialize(nullptr);
+  ::InterlockedIncrement(&grefcnt);
   ++grefcnt;
 
   reg_.create();
@@ -34,7 +35,7 @@ width_(300), height_(300), maxSize_(1 << 25), showThumb_(true)
     sizeof(INITCOMMONCONTROLSEX),
     ICC_STANDARD_CLASSES | ICC_LISTVIEW_CLASSES | ICC_BAR_CLASSES | ICC_USEREX_CLASSES | ICC_TAB_CLASSES | ICC_DATE_CLASSES
   };
-  InitCommonControlsEx(&cc);
+  ::InitCommonControlsEx(&cc);
 }
 
 void ShellExt::initializeFromRegistry()
@@ -54,8 +55,8 @@ void ShellExt::initializeFromRegistry()
 
 ShellExt::~ShellExt()
 {
-  --grefcnt;
-  CoUninitialize();
+  ::InterlockedDecrement(&grefcnt);
+  ::CoUninitialize();
 }
 
 IFACEMETHODIMP ShellExt::QueryInterface(REFIID iid, void ** ppv)
@@ -91,13 +92,13 @@ IFACEMETHODIMP ShellExt::QueryInterface(REFIID iid, void ** ppv)
 
 ULONG __stdcall ShellExt::AddRef(void)
 {
-  return InterlockedIncrement((LONG *)&refcnt_);
+  return ::InterlockedIncrement((LONG *)&refcnt_);
 
 }
 
 ULONG __stdcall ShellExt::Release(void)
 {
-  if (!InterlockedDecrement((LONG *)&refcnt_)) {
+  if (!::InterlockedDecrement((LONG *)&refcnt_)) {
     delete this;
     return 0;
   }
@@ -117,6 +118,14 @@ IFACEMETHODIMP ShellExt::Initialize(LPCITEMIDLIST pidlFolder, IDataObject *pData
   if (FAILED(pDataObj->GetData(&fmt, &stg))) {
     return E_INVALIDARG;
   }
+  std::unique_ptr<
+    std::remove_pointer<HANDLE>::type,
+    decltype(&::GlobalUnlock)
+  > sgguard(stg.hGlobal, ::GlobalUnlock);
+  std::unique_ptr<
+    STGMEDIUM,
+    decltype(&::ReleaseStgMedium)
+  > stgguard(&stg, ::ReleaseStgMedium);
 
   // Get a pointer to the actual data.
   drop = (HDROP)GlobalLock(stg.hGlobal);
@@ -129,22 +138,20 @@ IFACEMETHODIMP ShellExt::Initialize(LPCITEMIDLIST pidlFolder, IDataObject *pData
   // Sanity check - make sure there is at least one filename.
   UINT uNumFiles = DragQueryFile(drop, 0xFFFFFFFF, nullptr, 0);
 
-  HRESULT hr = S_OK;
   wchar_t path[MAX_PATH];
 
   if (!uNumFiles) {
-    hr = E_INVALIDARG;
+    return E_INVALIDARG;
   }
-  else if (!DragQueryFile(drop, 0, path, MAX_PATH)) {
-    hr = E_INVALIDARG;
+  if (uNumFiles > 5) {
+    return E_INVALIDARG;
   }
-  else {
-    path_ = path;
+  if (!DragQueryFile(drop, 0, path, MAX_PATH)) {
+    return E_INVALIDARG;
   }
-  GlobalUnlock(stg.hGlobal);
-  ReleaseStgMedium(&stg);
 
-  return hr;
+  path_ = path;
+  return S_OK;
 }
 
 // IInitializeWithItem
