@@ -1,10 +1,11 @@
 FastPreview Changes
--------------------
+===================
 
 4.0
+---
 * NEW: First open source release.
 * FIX: Fixed a scaling bug
-* NEW: Upgraded FreeImage3. This includes WebP support.
+* NEW: Upgraded FreeImage3. This includes WebP support. Also stripped down the stuff a bit (disabled a lot of plugins).
 * NEW: Upgraded build environment (MSVC12/ICC14)
 * NEW: Changed build to produce more optimized binaries.
 * NEW: Installing ProgIDs so you can easily switch to FP via Open with...
