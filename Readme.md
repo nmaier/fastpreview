@@ -29,6 +29,16 @@ License
 --
 Original code is licensed under the MIT LICENSE. Also see the `License.*.txt` files regarding licensing of third-party stuff.
 
+Contributing
+--
+* File issues. ;) Although you might not get an immediate response, be assured that I'll actually read those.
+* Test the stuff.
+* Submit pull requests.
+  * But keep in mind that any new code is supposed to be `C++11`-y.
+  * And also mind the license.
+  * And the compilers that are supposed to be supported.
+* Tell your friends (or something ;))
+
 Note
 --
 Please note that this stuff is essentially a mix of old "*let's write one of my first 
