@@ -255,25 +255,6 @@ void ShellExt::createView(HWND hwnd, const std::wstring& path)
 }
 
 namespace {
-  static void displayError()
-  {
-    LPVOID buf = nullptr;
-    DWORD error = GetLastError();
-
-    if (FormatMessage(
-      FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
-      nullptr,
-      error,
-      MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-      (LPTSTR)&buf,
-      0,
-      nullptr
-      )) {
-      MessageBox(nullptr, (LPWSTR)buf, s_error.c_str(), MB_ICONERROR);
-      LocalFree(buf);
-    }
-  }
-
   static __int64 __fastcall getFileSize(const std::wstring& path)
   {
     __int64 fs = 0;
