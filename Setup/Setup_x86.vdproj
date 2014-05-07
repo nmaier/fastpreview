@@ -245,7 +245,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B368A018FDAC49399322F3737F535078"
             {
-            "SourcePath" = "8:..\\Source.txt"
+            "SourcePath" = "8:Source.txt"
             "TargetName" = "8:Source.txt"
             "Tag" = "8:"
             "Folder" = "8:_559ECE9EFE9C43368D412E96E232B000"
