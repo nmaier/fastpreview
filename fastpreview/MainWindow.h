@@ -72,6 +72,7 @@ private:
 
   void DeleteMe();
   void Switch();
+  void AdjustSize(bool increment);
 
   void SetStatus(const std::wstring &aText = _T(""));
 

@@ -452,14 +452,7 @@ HANDLERIMPL(OnChar)
     break;
   case '-':
   case '+':
-    if (!best_) {
-      newAspect_ = (wchar_t)wparam == '+'
-        ? min(5.0f, newAspect_ + 0.1f)
-        : max(0.1f, newAspect_ - 0.1f);
-      SetTitle();
-      KillTimer(hwnd_, IDT_AACCEPT);
-      SetTimer(hwnd_, IDT_AACCEPT, 500, nullptr);
-    }
+    AdjustSize(wparam == '+');
     break;
 
   case '#':
@@ -1217,6 +1210,24 @@ void MainWindow::Switch()
     best_ = !best_;
     DoDC();
   }
+}
+
+void MainWindow::AdjustSize(bool increment)
+{
+  if (!best_ || !increment || newAspect_ <= bestAspect_) {
+    newAspect_ = increment
+      ? min(5.0f, newAspect_ + 0.1f)
+      : max(0.1f, newAspect_ - 0.1f);
+  }
+
+  if (best_) {
+    Switch();
+    return;
+  }
+
+  SetTitle();
+  KillTimer(hwnd_, IDT_AACCEPT);
+  SetTimer(hwnd_, IDT_AACCEPT, 500, nullptr);
 }
 
 void MainWindow::SetTitle()
