@@ -126,7 +126,7 @@ bool Registry::get(const std::wstring& name, uint32_t& data) const
   if (!subkey_) {
     throw std::logic_error("key not open");
   }
-  DWORD size = 0;
+  DWORD size = sizeof(uint32_t);
   auto rv = RegGetValue(
     subkey_,
     nullptr,
@@ -144,7 +144,7 @@ bool Registry::get(const std::wstring& name, uint64_t& data) const
   if (!subkey_) {
     throw std::logic_error("key not open");
   }
-  DWORD size = 0;
+  DWORD size = sizeof(uint64_t);
   auto rv = RegGetValue(
     subkey_,
     nullptr,
