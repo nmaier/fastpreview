@@ -39,7 +39,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <PlatformToolset>Intel C++ Compiler XE 14.0</PlatformToolset>
     <InterproceduralOptimization>true</InterproceduralOptimization>
-    <UseIntelIPP>Parallel_Static</UseIntelIPP>
+    <UseIntelIPP>Sequential</UseIntelIPP>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -48,7 +48,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <PlatformToolset>Intel C++ Compiler XE 14.0</PlatformToolset>
     <InterproceduralOptimization>true</InterproceduralOptimization>
-    <UseIntelIPP>Parallel_Static</UseIntelIPP>
+    <UseIntelIPP>Sequential</UseIntelIPP>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='WOW|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
