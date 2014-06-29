@@ -40,17 +40,6 @@ GET_FREEIMAGE_MARKER(BITMAPINFOHEADER *bmih) {
 ///////////////////////////////////////////////////////////////////
 // Construction / Destruction
 
-WinImage::WinImage(FREE_IMAGE_TYPE image_type, unsigned width, unsigned height, unsigned bpp) : Image(image_type, width, height, bpp) {
-	_display_dib = NULL;
-	_bDeleteMe = false;
-	// default tone mapping operator
-	_tmo = FITMO_DRAGO03;
-	_tmo_param_1 = 0;
-	_tmo_param_2 = 0;
-	_tmo_param_3 = 1;
-	_tmo_param_4 = 0;
-}
-
 WinImage::~WinImage() { 
 	if(_bDeleteMe) {
 		FreeImage_Unload(_display_dib);

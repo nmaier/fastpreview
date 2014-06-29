@@ -1166,8 +1166,39 @@ public:
 	/**@name Creation & Destruction */
 	//@{	
 	/// Constructor
-	WinImage(FREE_IMAGE_TYPE image_type = FIT_BITMAP, unsigned width = 0, unsigned height = 0, unsigned bpp = 0);
-	WinImage(const Image& src);
+	explicit WinImage(FREE_IMAGE_TYPE image_type = FIT_BITMAP, unsigned width = 0, unsigned height = 0, unsigned bpp = 0)
+		: Image(image_type, width, height, bpp),
+		_display_dib(nullptr),
+		_bDeleteMe(false),
+		_tmo(FITMO_DRAGO03),
+		_tmo_param_1(0),
+		_tmo_param_2(0),
+		_tmo_param_3(1),
+		_tmo_param_4(0)
+	{}
+
+	WinImage(const Image& src)
+		: Image(src),
+		_display_dib(nullptr),
+		_bDeleteMe(false),
+		_tmo(FITMO_DRAGO03),
+		_tmo_param_1(0),
+		_tmo_param_2(0),
+		_tmo_param_3(1),
+		_tmo_param_4(0)
+	{}
+
+	WinImage(const WinImage& src)
+		: Image(src),
+		_display_dib(nullptr),
+		_bDeleteMe(false),
+		_tmo(FITMO_DRAGO03),
+		_tmo_param_1(0),
+		_tmo_param_2(0),
+		_tmo_param_3(1),
+		_tmo_param_4(0)
+	{}
+
 
 	/// Destructor
 	virtual ~WinImage();
