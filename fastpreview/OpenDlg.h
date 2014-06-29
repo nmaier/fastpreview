@@ -13,12 +13,6 @@ public:
   typedef std::pair<std::wstring, std::wstring> FilterType;
   typedef std::deque<FilterType> FilterList;
 
-private:
-  wchar_t buf_[1024];
-  FilterList filter_;
-  std::wstring initialDir_;
-
-public:
   OpenDlg(const FilterList& aFilter, const std::wstring& aInitialDir);
   ~OpenDlg(void);
 
@@ -26,4 +20,10 @@ public:
 
   std::wstring getFileName() const;
   std::wstring getInitialDir() const;
+
+private:
+  wchar_t buf_[1024];
+  FilterList filter_;
+  std::wstring initialDir_;
+
 };

@@ -43,7 +43,7 @@ static UINT_PTR CALLBACK OFNHookProc(HWND hdlg, UINT msg, WPARAM wparam, LPARAM 
 }
 
 OpenDlg::OpenDlg(const FilterList& aFilter, const std::wstring& aInitialDir)
-: filter_(aFilter), initialDir_(aInitialDir)
+  : filter_(aFilter), initialDir_(aInitialDir)
 {
   buf_[0] = '\0';
 

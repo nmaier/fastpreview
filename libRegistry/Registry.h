@@ -54,7 +54,7 @@ public:
   bool set(const std::wstring& name, const std::wstring& data, DWORD type = REG_SZ) const;
 
   bool set(const std::wstring& name, const uint32_t data, DWORD type = REG_DWORD) const;
-  
+
   bool set(const std::wstring& name, const uint64_t data, DWORD type = REG_QWORD) const;
 
   inline bool set(const std::wstring& name, const bool data) const
@@ -83,7 +83,7 @@ public:
   }
 
   template<typename T>
-  static bool set(HKEY hkey, const std::wstring& key, const std::wstring& name, T data, DWORD type=REG_SZ)
+  static bool set(HKEY hkey, const std::wstring& key, const std::wstring& name, T data, DWORD type = REG_SZ)
   {
     Registry r(hkey, key);
     if (!r.create()) {
@@ -91,7 +91,7 @@ public:
     }
     return r.set(name, data, type);
   }
-  
+
   static bool remove(HKEY hkey, const std::wstring& key)
   {
     Registry r(hkey, key);

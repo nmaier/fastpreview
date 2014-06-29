@@ -16,6 +16,7 @@ namespace {
   static const wchar_t* blacklisted[] = {
     L"bmp", L"gif", L"jpeg", L"jpe", L"jpg", L"png", L"wbmp", L"ico"
   };
+
   inline bool isExtBlacklisted(const std::wstring& ext)
   {
     for (const auto& e : blacklisted) {
@@ -90,7 +91,7 @@ bool COMServers::Register(
   wstring clsIdPath(_T("CLSID\\"));
   clsIdPath.append(CLSID);
 
-  wstring module = ModulePath();
+  auto module = ModulePath();
 
   ENSURE(module.size() != 0, _T("modname ") + module);
 

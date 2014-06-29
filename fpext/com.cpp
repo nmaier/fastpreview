@@ -19,12 +19,12 @@ STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv)
     return CLASS_E_CLASSNOTAVAILABLE;
   }
 
-  Factory* factory = new(std::nothrow) Factory();
+  auto factory = new(std::nothrow) Factory();
   if (!factory) {
     return E_OUTOFMEMORY;
   }
 
-  HRESULT hr = factory->QueryInterface(riid, ppv);
+  auto hr = factory->QueryInterface(riid, ppv);
   factory->Release();
   return hr;
 }

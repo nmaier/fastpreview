@@ -12,6 +12,7 @@ namespace COMServers {
     const wstring& name, const wstring& description, const unsigned char version,
     const wstring& CLSID
     );
+
   bool Unregister(
     const wstring& name, const unsigned char version, const wstring& CLSID);
 

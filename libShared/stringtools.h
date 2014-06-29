@@ -64,7 +64,7 @@ namespace stringtools {
 
   inline std::wstring __cdecl formatResourceString(unsigned int resource, ...)
   {
-    std::wstring rv = loadResourceString(resource);
+    auto rv = loadResourceString(resource);
     if (!rv.empty()) {
       va_list args;
       va_start(args, resource);

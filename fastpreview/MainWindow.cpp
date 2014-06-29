@@ -119,20 +119,20 @@ static LRESULT CALLBACK MainWindowProc(
 }
 
 MainWindow::MainWindow(HINSTANCE aInstance, const std::wstring &aFile)
-: hinst_(aInstance),
-file_(aFile),
-fileAttr_(aFile),
-clientWidth_(300), clientHeight_(300),
-aspect_(1.0f),
-newAspect_(1.0f),
-best_(true),
-wheeling_(false),
-hmem_(nullptr),
-inTransformation_(false),
-keyCtrl_(FALSE),
-keyShift_(FALSE),
-mbtnDown_(FALSE),
-reg_(HKEY_CURRENT_USER, L"Software\\MaierSoft\\FastPreview")
+  : hinst_(aInstance),
+  file_(aFile),
+  fileAttr_(aFile),
+  clientWidth_(300), clientHeight_(300),
+  aspect_(1.0f),
+  newAspect_(1.0f),
+  best_(true),
+  wheeling_(false),
+  hmem_(nullptr),
+  inTransformation_(false),
+  keyCtrl_(FALSE),
+  keyShift_(FALSE),
+  mbtnDown_(FALSE),
+  reg_(HKEY_CURRENT_USER, L"Software\\MaierSoft\\FastPreview")
 {
   InitCommonControls();
 
@@ -1041,7 +1041,7 @@ void MainWindow::LoadFile()
       GetStockObject(DEFAULT_GUI_FONT)
       );
 
-    RECT  rc = { 0, 0, (LONG)Width(), (LONG)Height() };
+    RECT  rc = {0, 0, (LONG)Width(), (LONG)Height()};
     FillRect(
       hmem_,
       &rc,

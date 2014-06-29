@@ -21,8 +21,13 @@ namespace {
 UINT ShellExt::grefcnt = 0;
 
 ShellExt::ShellExt()
-: refcnt_(0), reg_(HKEY_CURRENT_USER, L"Software\\MaierSoft\\FastPreview"), alpha_(WTSAT_UNKNOWN),
-width_(300), height_(300), maxSize_(1 << 25), showThumb_(true)
+  : refcnt_(0),
+  reg_(HKEY_CURRENT_USER, L"Software\\MaierSoft\\FastPreview"),
+  alpha_(WTSAT_UNKNOWN),
+  width_(300),
+  height_(300),
+  maxSize_(1 << 25),
+  showThumb_(true)
 {
   (void)::CoInitialize(nullptr);
   ::InterlockedIncrement(&grefcnt);
@@ -110,14 +115,15 @@ IFACEMETHODIMP ShellExt::Initialize(LPCITEMIDLIST pidlFolder, IDataObject *pData
 {
   image_.clear();
 
-  FORMATETC fmt = { CF_HDROP, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL };
-  STGMEDIUM stg = { TYMED_HGLOBAL };
+  FORMATETC fmt = {CF_HDROP, nullptr, DVASPECT_CONTENT, -1, TYMED_HGLOBAL};
+  STGMEDIUM stg = {TYMED_HGLOBAL};
   HDROP drop;
 
   // Look for CF_HDROP data in the data object.
   if (FAILED(pDataObj->GetData(&fmt, &stg))) {
     return E_INVALIDARG;
   }
+
   std::unique_ptr<
     std::remove_pointer<HANDLE>::type,
     decltype(&::GlobalUnlock)
@@ -170,6 +176,7 @@ IFACEMETHODIMP ShellExt::Initialize(IShellItem *psi, DWORD grfMode)
     dump(L"InitializeWithItem - NoName");
     return rv;
   }
+
   if (!file) {
     dump(L"InitializeWithItem - NoName2");
     throw E_POINTER;
@@ -226,6 +233,7 @@ IFACEMETHODIMP ShellExt::GetCommandString(
   case GCS_VALIDATEW:
     return (idCmd == 3 || idCmd == 2) ? S_OK : S_FALSE;
   }
+
   return E_NOTIMPL;
 }
 
@@ -572,7 +580,7 @@ IFACEMETHODIMP ShellExt::GetThumbnail(
   // XXX Docs say that Windows will do the scaling for us.
   if (image.getWidth() > cx || image.getHeight() > cx) {
     image.rescale(cx, cx, FILTER_CATMULLROM, true);
-  }
+}
 #endif
 
   if (img.getImageType() != FIT_BITMAP && img.convertToType(FIT_BITMAP)) {

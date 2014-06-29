@@ -7,6 +7,7 @@ public:
   {
     (void)CoInitialize(nullptr);
   }
+
   ~CoGlue()
   {
     CoUninitialize();

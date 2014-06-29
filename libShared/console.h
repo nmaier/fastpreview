@@ -1,43 +1,48 @@
 #pragma once
 
 #ifdef _DEBUG
+
 #include <windows.h>
 #include <string>
 #include <tchar.h>
+
 using namespace std;
+
 class Console
 {
-  HANDLE hConsole;
-  CRITICAL_SECTION s;
+  HANDLE console_;
+  CRITICAL_SECTION s_;
 public:
   Console()
   {
     AllocConsole();
-    hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    InitializeCriticalSection(&s);
+    console_ = GetStdHandle(STD_OUTPUT_HANDLE);
+    InitializeCriticalSection(&s_);
   }
   ~Console()
   {
-    DeleteCriticalSection(&s);
+    DeleteCriticalSection(&s_);
     FreeConsole();
   }
   void write(wstring str)
   {
     str.append(L"\n");
-    EnterCriticalSection(&s);
+    EnterCriticalSection(&s_);
     DWORD cc;
     WriteConsole(
-      hConsole,
+      console_,
       str.c_str(),
       static_cast<DWORD>(str.length()),
       &cc,
       NULL
       );
-    LeaveCriticalSection(&s);
+    LeaveCriticalSection(&s_);
   }
-}
-extern console;
+};
+
+extern Console console;
 #define ConWrite(x) console.write(x)
-#else
+
+#else // _DEBUG
 #define ConWrite(x)
-#endif
+#endif // _DEBUG

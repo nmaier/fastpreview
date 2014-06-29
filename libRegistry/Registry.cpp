@@ -1,7 +1,7 @@
 #include "Registry.h"
 
 Registry::Registry(HKEY hkey, const std::wstring& key)
-: hkey_(hkey), key_(key), subkey_(nullptr)
+  : hkey_(hkey), key_(key), subkey_(nullptr)
 {
   if (key_.empty()) {
     throw std::logic_error("key cannot be empty");

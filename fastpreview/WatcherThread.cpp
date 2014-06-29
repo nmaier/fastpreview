@@ -8,7 +8,7 @@
 #include "Messages.h"
 
 WatcherThread::WatcherThread(const std::wstring& file, HWND aOwner)
-: Thread(), longFile_(file), hOwner_(aOwner)
+  : Thread(), longFile_(file), hOwner_(aOwner)
 {
   ConWrite(_T("Watching init"));
   hTerm_ = CreateEvent(nullptr, FALSE, FALSE, nullptr);
@@ -63,6 +63,7 @@ WatcherThread::~WatcherThread()
   catch (...) {
   }
 }
+
 void WatcherThread::Register()
 {
   ReadDirectoryChangesW(
@@ -78,11 +79,12 @@ void WatcherThread::Register()
     );
 
 }
+
 DWORD WatcherThread::operator()()
 {
   ovl_.hEvent = CreateEvent(nullptr, TRUE, TRUE, nullptr);
   Register();
-  HANDLE Handles[] = { hTerm_, ovl_.hEvent };
+  HANDLE Handles[] = {hTerm_, ovl_.hEvent};
   DWORD R;
   for (;;) {
     R = WaitForMultipleObjects(

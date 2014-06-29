@@ -16,16 +16,16 @@ typedef struct _secstruct_t
 } secstruct_t;
 
 static secstruct_t sections[] = {
-  { L"Comments", FIMD_COMMENTS },
-  { L"IPTC/NAA", FIMD_IPTC },
-  { L"Exif", FIMD_EXIF_EXIF },
-  { L"Exif Main", FIMD_EXIF_MAIN },
-  { L"Exif GPS", FIMD_EXIF_GPS },
-  { L"GeoTIFF", FIMD_GEOTIFF },
-  { L"Adobe XMP", FIMD_XMP },
-  { L"Animation", FIMD_ANIMATION },
-  { L"MarkerNotes", FIMD_EXIF_MAKERNOTE },
-  { L"Exif Interop", FIMD_EXIF_INTEROP },
+    {L"Comments", FIMD_COMMENTS},
+    {L"IPTC/NAA", FIMD_IPTC},
+    {L"Exif", FIMD_EXIF_EXIF},
+    {L"Exif Main", FIMD_EXIF_MAIN},
+    {L"Exif GPS", FIMD_EXIF_GPS},
+    {L"GeoTIFF", FIMD_GEOTIFF},
+    {L"Adobe XMP", FIMD_XMP},
+    {L"Animation", FIMD_ANIMATION},
+    {L"MarkerNotes", FIMD_EXIF_MAKERNOTE},
+    {L"Exif Interop", FIMD_EXIF_INTEROP},
 };
 
 const std::wstring PropertyPage::title = stringtools::loadResourceString(IDS_FASTPREVIEW);
@@ -46,13 +46,11 @@ PropertyPage::PropertyPage(
   psp.dwSize = sizeof(psp);
   psp.dwFlags = PSP_USEREFPARENT | PSP_USETITLE | PSP_USEHICON |
     PSP_USECALLBACK;
-
   psp.hInstance = gModThis;
   psp.pcRefParent = &ref;
   psp.pfnDlgProc = proc;
   psp.pfnCallback = callbackProc;
   psp.lParam = reinterpret_cast<LPARAM>(this);
-
   psp.pszTitle = title.c_str();
   psp.pszTemplate = MAKEINTRESOURCE(IDD_FPPROPPAGE);
   psp.hIcon = (HICON)::LoadImage(
@@ -132,8 +130,8 @@ INT_PTR PropertyPage::loop(UINT msg, WPARAM wparam, LPARAM lparam)
       !ListView_GetItemCount(hlist_)) {
       break;
     }
-    HMENU hmenu = LoadMenu(gModThis, MAKEINTRESOURCE(IDR_DATA_CTX));
-    HMENU hctx = GetSubMenu(hmenu, 0);
+    auto hmenu = LoadMenu(gModThis, MAKEINTRESOURCE(IDR_DATA_CTX));
+    auto hctx = GetSubMenu(hmenu, 0);
 
     const UINT flag = MF_BYCOMMAND |
       (ListView_GetSelectionMark(hlist_) == -1 ? MF_GRAYED : MF_ENABLED);
@@ -222,7 +220,7 @@ void PropertyPage::init()
 {
   SetDlgItemText(hwnd_, IDC_FILE, file_.c_str());
 
-  const FreeImage::Information& info = img_.getOriginalInformation();
+  const auto& info = img_.getOriginalInformation();
 
   auto typestr = stringtools::formatResourceString(
     IDS_PROP_TYPE,
