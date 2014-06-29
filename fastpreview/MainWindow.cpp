@@ -433,6 +433,10 @@ HANDLERIMPL(OnKey)
     LoadFile();
     break;
 
+  case VK_RETURN:
+    Switch();
+    break;
+
   default:
     HANDLERPASS;
   }
