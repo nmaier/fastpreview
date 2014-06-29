@@ -333,7 +333,7 @@ void PropertyPage::init()
     item.iGroupId = group.iGroupId++;
     item.iItem = 0;
 
-    while (finder.findNextMetadata(tag)) {
+    do {
       if (!tag.isValid()) {
         dump(L"Invalid tag");
         continue;
@@ -358,8 +358,9 @@ void PropertyPage::init()
         ++item.iSubItem,
         const_cast<LPWSTR>(value.c_str())
         );
-    }
+    } while (finder.findNextMetadata(tag));
   }
+
   if (ListView_GetItemCount(hlist_) != 0) {
     ListView_SetColumnWidth(hlist_, 0, LVSCW_AUTOSIZE);
     ListView_SetColumnWidth(hlist_, 1, LVSCW_AUTOSIZE);
