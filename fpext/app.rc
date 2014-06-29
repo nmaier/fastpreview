@@ -34,8 +34,8 @@ IDI_APP                 ICON                    "..\\icon\\fp-limited.ico"
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 4,0,0,0
- PRODUCTVERSION 4,0,0,0
+ FILEVERSION 4,1,0,0
+ PRODUCTVERSION 4,1,0,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -52,12 +52,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Nils Maier"
             VALUE "FileDescription", "FastPreview >> Shell Extension"
-            VALUE "FileVersion", "4.0.0.0"
+            VALUE "FileVersion", "4.1.0.0"
             VALUE "InternalName", "fastprev"
             VALUE "LegalCopyright", "Copyright © 2006-2014 by Nils Maier"
             VALUE "OriginalFilename", "fpext.dll"
             VALUE "ProductName", "FastPreview"
-            VALUE "ProductVersion", "4.0.0.0"
+            VALUE "ProductVersion", "4.1.0.0"
         END
     END
     BLOCK "VarFileInfo"

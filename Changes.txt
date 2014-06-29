@@ -1,6 +1,13 @@
 FastPreview Changes
 ===================
 
+4.1
+---
+* FIX: Crasher with transparent backgrounds (#4)
+* FIX: Some meta data fields where omitted (#2)
+* NEW: Better keyboard handling (#5, #6)
+* FIX: Some settings where not properly recalled (#8)
+
 4.0
 ---
 * NEW: First open source release.
