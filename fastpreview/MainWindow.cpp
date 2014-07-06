@@ -470,14 +470,33 @@ HANDLERIMPL(OnChar)
     break;
   case '-':
   case '+':
-    AdjustSize(wparam == '+');
+  case '=':
+  case '_':
+    AdjustSize(wparam == '+' || wparam == '=');
     break;
 
   case '#':
-  case '0':
-    if (!best_) {
+    if (!best_ && aspect_ != 1.0f) {
       aspect_ = newAspect_ = 1.0f;
       DoDC();
+    }
+    break;
+
+  case '0':
+  case '/':
+    if (best_) {
+      aspect_ = newAspect_ = 1.0f;
+      Switch();
+    }
+    else if (aspect_ != 1.0f) {
+      aspect_ = newAspect_ = 1.0f;
+      DoDC();
+    }
+    break;
+
+  case '*':
+    if (!best_) {
+      Switch();
     }
     break;
 
