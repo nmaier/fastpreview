@@ -25,6 +25,7 @@ private:
   const HINSTANCE hinst_;
 
   UINT clientWidth_, clientHeight_;
+  UINT canvasWidth_, canvasHeight_;
 
   HWND hwnd_, hstatus_;
   HDC hmem_;

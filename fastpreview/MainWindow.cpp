@@ -37,6 +37,23 @@ namespace {
   const std::wstring s_err_load = loadResourceString(IDS_ERR_LOAD);
   const std::wstring s_err_unsupported = loadResourceString(IDS_ERR_UNSUPPORTED);
 
+  class __declspec(novtable) DisableRedraw
+  {
+  private:
+    HWND hwnd_;
+
+  public:
+    DisableRedraw(HWND hwnd) : hwnd_(hwnd)
+    {
+      SendMessage(hwnd_, WM_SETREDRAW, (WPARAM)FALSE, 0);
+    }
+
+    ~DisableRedraw()
+    {
+      SendMessage(hwnd_, WM_SETREDRAW, (WPARAM)TRUE, 0);
+    }
+  };
+
   class MenuMethod
   {
   private:
@@ -123,6 +140,7 @@ MainWindow::MainWindow(HINSTANCE aInstance, const std::wstring &aFile)
   file_(aFile),
   fileAttr_(aFile),
   clientWidth_(300), clientHeight_(300),
+  canvasWidth_(300), canvasHeight_(300),
   aspect_(1.0f),
   newAspect_(1.0f),
   best_(true),
@@ -458,7 +476,7 @@ HANDLERIMPL(OnChar)
   case '#':
   case '0':
     if (!best_) {
-      aspect_ = 1.0f;
+      aspect_ = newAspect_ = 1.0f;
       DoDC();
     }
     break;
@@ -909,6 +927,8 @@ void MainWindow::Show()
 
 void MainWindow::PreAdjustWindow()
 {
+  ShowScrollBar(hwnd_, SB_BOTH, FALSE);
+
   WINDOWINFO wi;
   ZeroMemory(&wi, sizeof(WINDOWINFO));
   GetWindowInfo(
@@ -955,11 +975,11 @@ void MainWindow::PreAdjustWindow()
     &si,
     TRUE
     );
+
   if (vs) {
     si.nPage = maxY;
     si.nMax = Height() + (hs ? GetSystemMetrics(SM_CYHSCROLL) : 0);
   }
-
   SetScrollInfo(
     hwnd_,
     SB_VERT,
@@ -967,41 +987,18 @@ void MainWindow::PreAdjustWindow()
     TRUE
     );
 
+  SetScrollPos(hwnd_, SB_BOTH, 0, FALSE);
+
   wheeling_ = hs || vs;
 
-  if (vs) {
-    ShowScrollBar(hwnd_, SB_VERT, TRUE);
-  }
-  if (hs) {
-    ShowScrollBar(hwnd_, SB_HORZ, TRUE);
-  }
-
-
-  clientHeight_ = min(maxY, Height());
-  clientWidth_ = min(maxX, Width());
+  canvasHeight_ = clientHeight_ = min(maxY, Height());
+  canvasWidth_ = clientWidth_ = min(maxX, Width());
   if (hs) {
     clientHeight_ = min(clientHeight_ + GetSystemMetrics(SM_CYHSCROLL), maxY);
   }
   if (vs) {
     clientWidth_ = min(clientWidth_ + GetSystemMetrics(SM_CXVSCROLL), maxX);
   }
-
-  Rect rw(clientWidth_, clientHeight_);
-  AdjustWindowRectEx(
-    &rw,
-    wi.dwStyle,
-    FALSE,
-    wi.dwExStyle
-    );
-
-  MoveWindow(
-    hwnd_,
-    wr.left,
-    wr.top,
-    rw.width(),
-    rw.height(),
-    TRUE
-    );
 }
 
 void MainWindow::LoadFile()
@@ -1022,41 +1019,41 @@ void MainWindow::LoadFile()
   }
 
   if (!load) {
-    sp_.x = sp_.y = 0;
-    clientHeight_ = clientWidth_ = 400;
+      {
+        DisableRedraw dr(hwnd_);
+        sp_.x = sp_.y = 0;
+        clientHeight_ = clientWidth_ = 400;
 
-    ShowScrollBar(hwnd_, SB_BOTH, FALSE);
-    PreAdjustWindow();
+        PreAdjustWindow();
+        CreateDC();
 
-    CreateDC();
+        if (hmem_ == INVALID_HANDLE_VALUE) {
+          throw WindowsException();
+        }
+        SelectObject(
+          hmem_,
+          GetStockObject(DEFAULT_GUI_FONT)
+          );
 
-    if (hmem_ == INVALID_HANDLE_VALUE) {
-      throw WindowsException();
-    }
-    SelectObject(
-      hmem_,
-      GetStockObject(DEFAULT_GUI_FONT)
-      );
+        RECT  rc = {0, 0, (LONG)Width(), (LONG)Height()};
+        FillRect(
+          hmem_,
+          &rc,
+          (HBRUSH)(COLOR_BTNFACE + 1)
+          );
+        if (!DrawText(
+          hmem_,
+          s_err_load.c_str(),
+          -1,
+          &rc,
+          DT_SINGLELINE | DT_CENTER | DT_VCENTER
+          )) {
+          throw WindowsException();
+        }
 
-    RECT  rc = {0, 0, (LONG)Width(), (LONG)Height()};
-    FillRect(
-      hmem_,
-      &rc,
-      (HBRUSH)(COLOR_BTNFACE + 1)
-      );
-    if (!DrawText(
-      hmem_,
-      s_err_load.c_str(),
-      -1,
-      &rc,
-      DT_SINGLELINE | DT_CENTER | DT_VCENTER
-      )) {
-      throw WindowsException();
-    }
-
+        SetTitle();
+      }
     CenterWindow();
-    SetTitle();
-    InvalidateRect(hwnd_, nullptr, FALSE);
   }
   else {
     if (img_.getFormat() == FIF_BMP && img_.getBitsPerPixel() == 32) {
@@ -1070,71 +1067,74 @@ void MainWindow::LoadFile()
 void MainWindow::DoDC()
 {
   ConWrite(_T("DoDC"));
-  ShowScrollBar(hwnd_, SB_BOTH, FALSE);
-  PreAdjustWindow();
-  SetTitle();
+  {
+    DisableRedraw dr(hwnd_);
 
-  CreateDC();
+    PreAdjustWindow();
+    SetTitle();
 
-  const UINT left = (dcDims_.x - Width()) / 2;
-  const UINT top = (dcDims_.y - Height()) / 2;
+    CreateDC();
 
-  float fasp = fabs(1.f - (best_ ? bestAspect_ : aspect_));
-  if (fasp < 1e-4) {
-    img_.draw(hmem_, Rect(left, top, left + Width(), top + Height()));
-    ConWrite(itos(Width()) + _T("-") + itos(clientWidth_));
-  }
-  else {
-    SetStatus(s_resizing.c_str());
-    const UINT w = Width();
-    const UINT h = Height();
-    try {
-      FreeImage::WinImage r(img_);
-      r.rescale(w, h, GetResampleMethod());
-      r.draw(hmem_, Rect(left, top, left + w, top + h));
-    }
-    catch (std::exception& ex) {
-      SetStatus(stringtools::convert(ex.what()));
-    }
+    const UINT left = (dcDims_.x - Width()) / 2;
+    const UINT top = (dcDims_.y - Height()) / 2;
 
-    SetStatus();
-  }
-
-  SHFILEINFO shfi;
-  shfi.hIcon = 0;
-  shfi.iIcon = 0;
-
-  std::wstring e = file_.substr(0, file_.rfind('.') + 1);
-  e.append(stringtools::convert(img_.getOriginalInformation().getFormat().getFirstExtension()));
-
-  UINT iconType = SHGFI_LARGEICON;
-  if (Width() < 160 || Height() < 160) {
-    iconType = SHGFI_SMALLICON;
-  }
-
-  HIMAGELIST hImgList = (HIMAGELIST)SHGetFileInfo(
-    e.c_str(),
-    FILE_ATTRIBUTE_NORMAL,
-    &shfi,
-    sizeof(SHFILEINFO),
-    SHGFI_USEFILEATTRIBUTES | SHGFI_SYSICONINDEX | iconType
-    );
-
-  if (hImgList != nullptr) {
-    if (iconType == SHGFI_SMALLICON) {
-      ImageList_Draw(hImgList, shfi.iIcon, hmem_, dcDims_.x - 5 - GetSystemMetrics(SM_CXSMICON), 5, ILD_TRANSPARENT);
-      //DrawIcon(hmem_, Width() - 5 - GetSystemMetrics(SM_CXICON), 5, shfi.hIcon);
+    float fasp = fabs(1.f - (best_ ? bestAspect_ : aspect_));
+    if (fasp < 1e-4) {
+      img_.draw(hmem_, Rect(left, top, left + Width(), top + Height()));
+      ConWrite(itos(Width()) + _T("-") + itos(clientWidth_));
     }
     else {
-      ImageList_Draw(hImgList, shfi.iIcon, hmem_, Width() - 10 - GetSystemMetrics(SM_CXICON), 10, ILD_TRANSPARENT);
+      SetStatus(s_resizing.c_str());
+      const UINT w = Width();
+      const UINT h = Height();
+      try {
+        FreeImage::WinImage r(img_);
+        r.rescale(w, h, GetResampleMethod());
+        r.draw(hmem_, Rect(left, top, left + w, top + h));
+      }
+      catch (std::exception& ex) {
+        SetStatus(stringtools::convert(ex.what()));
+      }
+
+      SetStatus();
     }
-    if (shfi.hIcon != 0) {
-      DestroyIcon(shfi.hIcon);
+
+    SHFILEINFO shfi;
+    shfi.hIcon = 0;
+    shfi.iIcon = 0;
+
+    std::wstring e = file_.substr(0, file_.rfind('.') + 1);
+    e.append(stringtools::convert(img_.getOriginalInformation().getFormat().getFirstExtension()));
+
+    UINT iconType = SHGFI_LARGEICON;
+    if (Width() < 160 || Height() < 160) {
+      iconType = SHGFI_SMALLICON;
     }
+
+    HIMAGELIST hImgList = (HIMAGELIST)SHGetFileInfo(
+      e.c_str(),
+      FILE_ATTRIBUTE_NORMAL,
+      &shfi,
+      sizeof(SHFILEINFO),
+      SHGFI_USEFILEATTRIBUTES | SHGFI_SYSICONINDEX | iconType
+      );
+
+    if (hImgList != nullptr) {
+      if (iconType == SHGFI_SMALLICON) {
+        ImageList_Draw(hImgList, shfi.iIcon, hmem_, dcDims_.x - 5 - GetSystemMetrics(SM_CXSMICON), 5, ILD_TRANSPARENT);
+        //DrawIcon(hmem_, Width() - 5 - GetSystemMetrics(SM_CXICON), 5, shfi.hIcon);
+      }
+      else {
+        ImageList_Draw(hImgList, shfi.iIcon, hmem_, Width() - 10 - GetSystemMetrics(SM_CXICON), 10, ILD_TRANSPARENT);
+      }
+      if (shfi.hIcon != 0) {
+        DestroyIcon(shfi.hIcon);
+      }
+    }
+    sp_.x = sp_.y = 0;
   }
-  sp_.x = sp_.y = 0;
+
   CenterWindow();
-  InvalidateRect(hwnd_, nullptr, FALSE);
 }
 
 void MainWindow::FreeFile()
@@ -1150,10 +1150,8 @@ void MainWindow::CreateDC()
   }
   hmem_ = CreateCompatibleDC(nullptr);
 
-  Rect cr;
-  GetClientRect(hwnd_, &cr);
-  const UINT width = max(Width(), (UINT)cr.width());
-  const UINT height = max(Height(), (UINT)cr.height());
+  const UINT width = max(Width(), (UINT)canvasWidth_);
+  const UINT height = max(Height(), (UINT)canvasHeight_);
 
 
   DeleteObject(SelectObject(hmem_, CreateCompatibleBitmap(GetDC(hwnd_), width, height)));
@@ -1283,10 +1281,18 @@ void MainWindow::SetStatus(const std::wstring &aText)
 
 void MainWindow::CenterWindow() const
 {
-  Rect rw;
-  GetWindowRect(
+  WINDOWINFO wi;
+  ZeroMemory(&wi, sizeof(WINDOWINFO));
+  GetWindowInfo(
     hwnd_,
-    &rw
+    &wi
+    );
+  Rect rw(clientWidth_, clientHeight_);
+  AdjustWindowRectEx(
+    &rw,
+    wi.dwStyle,
+    FALSE,
+    wi.dwExStyle
     );
   WorkArea wa(hwnd_);
   rw.centerIn(wa);
@@ -1297,6 +1303,19 @@ void MainWindow::CenterWindow() const
     rw.width(),
     rw.height(),
     TRUE
+    );
+  if (canvasHeight_ != clientHeight_) {
+    ShowScrollBar(hwnd_, SB_HORZ, TRUE);
+  }
+  else if (canvasWidth_ != clientWidth_) {
+    ShowScrollBar(hwnd_, SB_VERT, TRUE);
+  }
+
+  RedrawWindow(
+    hwnd_,
+    nullptr,
+    nullptr,
+    RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN
     );
 }
 
